@@ -69,7 +69,7 @@ async function getPokemon() {
 
     // Harcoded for develop,ent, replace "pikachu" with a random number
     // random number is ID from 1 to 1025
-    let apiResponse = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+    let apiResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + getRandomPokemonId());
     let apiData = await apiResponse.json();
 
     // console.log(apiData);
@@ -98,4 +98,33 @@ encounterButton.addEventListener("click", async (event) => {
     console.log(pokemonResult);
 
     renderPokemonData(pokemonResult);
+});
+
+
+
+let encounterGroupButton = document.getElementById("pokemonGroupEncounter");
+
+encounterGroupButton.addEventListener("click", async () => {
+
+    pokemonRenderArea.innerText = "";
+
+        let multiplePokemonResult = await Promise.all([
+            getPokemon(),
+            getPokemon(),
+            getPokemon(),
+            getPokemon(),
+            getPokemon(),
+            getPokemon(),
+        ]);
+
+    console.log(multiplePokemonResult);
+
+    multiplePokemonResult.forEach(renderPokemonData);
+
+    // multipolePokemonResult.forEach((pokemonResult) => remderPokemonData(pokemonResult));
+
+    // multiplePokemonResult.forEach((pokemonResult) => {
+    //     renderPokemonData(pokemonResult)
+    // });
+    
 });
